@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org"    >
+<head>
+    <meta charset="UTF-8">
+    <title>Tinder: Registration</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+          integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/registration.css">
+</head>
+<body>
+
+<header class="header">
+    <a href="registration.html" class="header-link"><img src="images/iba-logo.svg" alt="IBA Tech Academy"></a>
+</header>
+
+<section class="registration-section">
+    <img class="registration-section-image" src="images/login-background.svg" alt="404">
+    <div class="registration-section-container">
+        <h1 class="registration-section-container-title">Create An Account</h1>
+        <p class="registration-section-container-description">Create your account, it takes less than a minute. If you already have an account - <a href="index" class="registration-section-container-description-link">login</a></p>
+        <form method="post" role="form" th:action="@{/register/save}" th:object="${user}"  action="" class="registration-section-container-form">
+            <div class="registration-section-container-form-input-wrapper">
+                <img src="images/user-icon.svg" alt="User Icon">
+                <label for="username"></label>
+                <input th:field="*{username}" class="registration-section-container-form-input" id="username" placeholder="Username" type="text">
+            </div>
+            <p th:if="${#fields.hasErrors('username')}" class="text-danger"></p>
+            <div class="registration-section-container-form-input-wrapper">
+                <img src="images/mail-icon.svg" alt="User Icon">
+                <label for="email"></label>
+                <p th:if="${#fields.hasErrors('email')}" class="text-danger"></p>
+                <input th:field="*{email}" class="registration-section-container-form-input" id="email" placeholder="Email address" type="email">
+            </div>
+            <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"></p>
+            <div class="registration-section-container-form-input-wrapper">
+                <img src="images/lock-icon.svg" alt="User Icon">
+                <label for="password"></label>
+                <p th:if="${#fields.hasErrors('email')}" class="text-danger"></p>
+                <input  th:field="*{password}" class="registration-section-container-form-input" id="password" placeholder="Password" type="password">
+            </div>
+            <div class="registration-section-container-form-input-wrapper mb0">
+                <img src="images/lock-icon.svg" alt="User Icon">
+                <label for="confirm-password"></label>
+                <input  th:field="*{confirmPassword}" class="registration-section-container-form-input" id="confirm-password" placeholder="Confirm Password" type="password">
+            </div>
+            <input th:href="@{/register}" type="submit" value="Create account" class="registration-section-container-form-submit">
+        </form>
+    </div>
+</section>
+
+</body>
+</html>

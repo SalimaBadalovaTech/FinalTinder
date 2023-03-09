@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tinder: Favourites</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/favourites.css">
+</head>
+<body>
+<header class="main-header">
+    <a href="main-page" class="main-header-logo">
+        <img src="images/iba-tech-logo-white.svg" alt="IBA Tech Academy"></a>
+    <div class="main-header-wrapper">
+        <label class="main-header-search-wrapper">
+            <input type="search" class="main-header-search" placeholder="Add new profile">
+            <img src="images/search-icon.svg" alt="Search Icon">
+        </label>
+        <div class="main-header-profile-wrapper">
+            <div class="main-header-profile-credentials">
+                <span class="main-header-profile-welcome">Welcome,</span>
+                <span class="main-header-username" th:utext="*{name}"></span>
+            </div>
+            <img class="main-header-user-icon" src="images/user-icon-with-background.svg" alt="User Icon">
+            <div class="hidden-accordion-wrapper">
+                <ul class="hidden-accordion">
+                    <li class="hidden-accordion-item"><a href="my-profile" class="hidden-accordion-item-link"><img
+                            class="hidden-accordion-item-image" src="images/user-icon-gray.svg" alt="User Icon">Profile</a>
+                    </li>
+                    <li class="hidden-accordion-item"><a href="favourites" class="hidden-accordion-item-link"><img
+                            class="hidden-accordion-item-image" src="images/favourite-icon.svg" alt="Favourite Icon">Favourites</a>
+                    </li>
+                    <li class="hidden-accordion-item"><a href="#" class="hidden-accordion-item-link"><img
+                            class="hidden-accordion-item-image" src="images/message-icon.svg"
+                            alt="Message Icon">Chat</a></li>
+                    <li class="hidden-accordion-item"><a href="index" class="hidden-accordion-item-link"><img
+                            class="hidden-accordion-item-image" src="images/log-out-icon.svg" alt="Log Out Icon">Log Out</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="container">
+
+    <h1 class="favourites-title">Favourites</h1>
+
+    <div class="favourites-container">
+        <tr th:each="profile:${liked}">
+            <div class="favourites-card">
+                <form method="post"  role="form" th:action="@{/remove-favorite}" th:object="${user}" action=""
+                      class="registration-section-container-form">
+                    <input th:field="*{username}" class="registration-section-container-form-input"
+                           id="username" type="hidden">
+
+                    <img class="favourites-card-image" th:src="${profile.profilePicture}" alt="Sample User Avatar">
+                    <h3 class="favourites-card-title" >
+                        <span  th:field="*{username}" th:value="${profile.username}" class="main-section-card-name"
+                                                            th:text="${profile.username}"></span></h3>
+                    <p class="favourites-card-description"><span class="main-section-card-name"
+                                                                 th:text="${profile.about}"></span></p>
+                    <a href="#" class="favourites-message-button"><img class="favourites-message-button-icon"
+                                                                       src="images/mail-icon.svg"
+                                                                       alt="mail icon">Message</a>
+                    <form th:action="@{/remove-favorite}" role="form" th:method="post" method="post">
+                        <button th:href="@{/remove-favorite}" href="#" class="favourites-card-remove"><img
+                                class="favourites-card-remove-icon"
+                                src="images/favourite-icon-red.svg"
+                                alt="favourite icon">Remove
+                        </button>
+                    </form>
+                </form>
+            </div>
+    </div>
+</div>
+</body>
+</html>

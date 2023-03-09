@@ -1,0 +1,23 @@
+spring:
+  #H2 database
+  datasource:
+    url: jdbc:postgresql://containers-us-west-27.railway.app:5452/railway
+    driverClassName: org.postgresql.Driver
+    username: postgres
+    password: zQvqRwjhDe7k2uVhksZC
+  main:
+    allow-bean-definition-overriding: true
+  h2:
+    console:
+      enabled: true
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+  security:
+    user:
+      password: " "
+#logging:
+#  level:
+#    org:
+#      springframework:
+#        security: DEBUG
